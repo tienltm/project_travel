@@ -11,8 +11,8 @@ namespace API.Data
             {
                 var user = new User
                 {
-                    UserName = "bob",
-                    Email = "bob@test.com"
+                    UserName = "user",
+                    Email = "user@test.com"
                 };
 
                 await userManager.CreateAsync(user, "Pa$$w0rd");
@@ -27,7 +27,7 @@ namespace API.Data
                 await userManager.CreateAsync(admin, "Pa$$w0rd");
                 await userManager.AddToRolesAsync(admin, new[] {"Member", "Admin"});
             }
-            
+
 
             if (context.Products.Any()) return;
 
@@ -230,7 +230,7 @@ namespace API.Data
                     QuantityInStock = 100
                 },
             };
-            
+
             foreach (var product in products)
             {
                 context.Products.Add(product);
