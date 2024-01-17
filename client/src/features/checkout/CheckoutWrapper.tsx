@@ -7,24 +7,26 @@ import { useAppDispatch } from "../../app/store/configureStore";
 import { setBasket } from "../basket/basketSlice";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 
-const stripePromise = loadStripe('pk_test_51JV6ejEiX6mroRZ6LZfplGw2mBnYSq6Jvj0T927DOTLH7nqQbSKXYDmuB1RsaVPitHEJEYo1cz5Dd8Naagiaxe5X00OqnaFoUY');
+const stripePromise = loadStripe(
+  "pk_test_51OWeopDpuavLQPNdsHrtpq1u2S9rcFkbkGJOVlFmip9lBaQ7SiKfZ1nI3A2LwWpEdzEdLAuRFDkENVno5C6W9tcb00YPjD4xDX"
+);
 
 export default function CheckoutWrapper() {
-    const dispatch = useAppDispatch();
-    const [loading, setLoading] = useState(true);
+  const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        agent.Payments.createPaymentIntent()
-            .then(response => dispatch(setBasket(response)))
-            .catch(error => console.log(error))
-            .finally(() => setLoading(false))
-    }, [dispatch]);
+  useEffect(() => {
+    agent.Payments.createPaymentIntent()
+      .then((response) => dispatch(setBasket(response)))
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false));
+  }, [dispatch]);
 
-    if (loading) return <LoadingComponent message='Loading checkout' />
+  if (loading) return <LoadingComponent message="Loading checkout" />;
 
-    return (
-        <Elements stripe={stripePromise}>
-            <CheckoutPage />
-        </Elements>
-    )
-} 
+  return (
+    <Elements stripe={stripePromise}>
+      <CheckoutPage />
+    </Elements>
+  );
+}
